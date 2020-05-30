@@ -39,7 +39,7 @@ CREATE TABLE system_request_log (
     request_method TEXT,
     query_string TEXT,
     request_headers TEXT,
-    request_body TEXT
+    request_body TEXT,
     request_duration INT
 );
 

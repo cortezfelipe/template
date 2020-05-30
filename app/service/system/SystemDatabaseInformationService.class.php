@@ -59,16 +59,17 @@ class SystemDatabaseInformationService
     /**
      * Get list of database connections
      */
-    public static function getConnections()
+    public static function getConnections( $with_system_connections = false )
     {
         $list = [];
+        
         foreach (new DirectoryIterator('app/config') as $file)
         {
-            $connection = str_replace('.ini', '', $file->getFilename());
+            $connection = str_replace(['.ini','.php'], ['',''], $file->getFilename());
             
-            if ($file->isFile() && $file->getExtension() == 'ini' && !in_array($connection, self::SYSTEM_CONNECTIONS))
+            if ($file->isFile() && in_array($file->getExtension(), ['ini','php']) && ( !in_array($connection, self::SYSTEM_CONNECTIONS) || $with_system_connections ) )
             {
-                $content = parse_ini_file('app/config/'.$file->getFilename());
+                $content = TConnection::getDatabaseInfo($connection);
                 if (!empty($content['type']) && in_array($content['type'], ['pgsql', 'mysql', 'sqlite', 'ibase', 'fbird', 'oracle', 'mssql', 'dblib', 'sqlsrv']))
                 {
                     $list[ $connection ] = $connection;

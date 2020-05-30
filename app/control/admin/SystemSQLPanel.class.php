@@ -22,19 +22,7 @@ class SystemSQLPanel extends TPage
         $this->form->setFormTitle('SQL Panel');
         
         $list = scandir('app/config');
-        $options = array();
-        foreach ($list as $entry)
-        {
-            if (substr($entry, -4) == '.ini')
-            {
-                $ini = parse_ini_file('app/config/'.$entry);
-                
-                if (!empty($ini['type']) && in_array($ini['type'], ['pgsql', 'mysql', 'sqlite', 'oracle', 'mssql']))
-                {
-                    $options[ substr($entry,0,-4) ] = str_replace('.ini', '', $entry);
-                }
-            }
-        }
+        $options = SystemDatabaseInformationService::getConnections( true );
         
         $database = new TCombo('database');
         $table = new TCombo('table');

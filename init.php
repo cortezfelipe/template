@@ -24,7 +24,9 @@ define('LANG', $ini['general']['language']);
 // custom session name
 session_name('PHPSESSID_'.$ini['general']['application']);
 
+/*
 if (version_compare(PHP_VERSION, '7.0.0') == -1)
 {
     die(AdiantiCoreTranslator::translate('The minimum version required for PHP is ^1', '7.0.0'));
 }
+*/

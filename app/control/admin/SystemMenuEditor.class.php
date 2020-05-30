@@ -157,9 +157,10 @@ class SystemMenuEditor extends TPage
             if ($count % 4 == 0)
             {
                 $objectLinha->chave = $key;
-                
-                $mensagem = self::validateMenu($objectLinha, $linha);
-
+ 
+                $tem_filho = (bool) self::getChildKeys($param, $key);
+                $mensagem  = self::validateMenu($objectLinha, $linha, $tem_filho);
+ 
                 if ($mensagem)
                 {
                     $valiation_msg[] = $mensagem;
@@ -193,15 +194,20 @@ class SystemMenuEditor extends TPage
         if (is_writable('menu.xml'))
         {
             $domDocument->save('menu.xml');
-            new TMessage('info', _t('Menu saved'));
-            AdiantiCoreApplication::gotoPage('SystemMenuEditor');
+            $action = new TAction([SystemMenuEditor::class, "reloadMenu"]);
+            new TMessage('info', _t('Menu saved'), $action);
         }
         else
         {
             new TMessage('error', _t('Permission denied') . ': <b>menu.xml</b>');
         }
     }
-    
+ 
+    public function reloadMenu()
+    {
+        AdiantiCoreApplication::gotoPage('SystemMenuEditor');
+    }
+ 
     /**
      * Create child node
      */
@@ -262,7 +268,7 @@ class SystemMenuEditor extends TPage
     /**
      * Validate menu
      */
-    public static function validateMenu($menu, $linha)
+    public static function validateMenu($menu, $linha, $tem_filho)
     {
         $fields   = [];
         
@@ -270,8 +276,8 @@ class SystemMenuEditor extends TPage
         {
             $fields[] = _t('Label');
         }
-        
-        if (self::getLevel($menu->chave) != 1 AND empty($menu->action))
+ 
+        if (self::getLevel($menu->chave) != 1 AND empty($menu->action) AND !$tem_filho)
         {
             $fields[] = _t('Action');
         }

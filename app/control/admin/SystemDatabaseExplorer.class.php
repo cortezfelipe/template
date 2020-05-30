@@ -64,16 +64,19 @@ class SystemDatabaseExplorer extends TPage
         
         // load database connections into datagrid
         $list = scandir('app/config');
-        $options = array();
+        
+        $options = [];
         foreach ($list as $entry)
         {
-            if (substr($entry, -4) == '.ini')
+            if ( (substr($entry, -4) == '.ini') || (substr($entry, -4) == '.php') )
             {
-                $ini = parse_ini_file('app/config/'.$entry);
+                $connector = str_replace(['.ini', '.php'], ['', ''], $entry);
+                $ini = TConnection::getDatabaseInfo($connector);
+                
                 if (!empty($ini['type']) && in_array($ini['type'], ['pgsql', 'mysql', 'sqlite', 'oracle', 'mssql']))
                 {
-                    $options[ substr($entry,0,-4) ] = str_replace('.ini', '', $entry);
-                    $this->datagrid->addItem( (object) ['database' => str_replace('.ini', '', $entry), 'type' => $ini['type']]);
+                    $options[ $connector ] = $connector;
+                    $this->datagrid->addItem( (object) ['database' => $connector, 'type' => $ini['type']] );
                 }
             }
         }

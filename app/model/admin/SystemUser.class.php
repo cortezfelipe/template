@@ -301,7 +301,7 @@ class SystemUser extends TRecord
     public static function authenticate($login, $password)
     {
         $user = self::newFromLogin($login);
-        if ($user->password !== md5($password))
+        if (!hash_equals($user->password, md5($password)))
         {
             throw new Exception(_t('Wrong password'));
         }

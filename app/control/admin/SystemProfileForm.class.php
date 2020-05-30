@@ -17,8 +17,10 @@ class SystemProfileForm extends TPage
     {
         parent::__construct();
         
-        $this->form = new BootstrapFormWrapper(new TQuickForm);
+        $this->form = new BootstrapFormBuilder;
         $this->form->setFormTitle(_t('Profile'));
+        $this->form->setClientValidation(true);
+        $this->form->enableCSRFProtection();
         
         $name  = new TEntry('name');
         $login = new TEntry('login');
@@ -29,24 +31,29 @@ class SystemProfileForm extends TPage
         $login->setEditable(FALSE);
         $photo->setAllowedExtensions( ['jpg'] );
         
-        $this->form->addQuickField( _t('Name'), $name, '80%', new TRequiredValidator );
-        $this->form->addQuickField( _t('Login'), $login, '80%', new TRequiredValidator );
-        $this->form->addQuickField( _t('Email'), $email, '80%', new TRequiredValidator );
-        $this->form->addQuickField( _t('Photo'), $photo, '80%' );
-        $this->form->addQuickField( _t('Password'), $password1, '80%' );
-        $this->form->addQuickField( _t('Password confirmation'), $password2, '80%' );
+        $name->setSize('80%');
+        $login->setSize('80%');
+        $email->setSize('80%');
+        $photo->setSize('80%');
+        $password1->setSize('80%');
+        $password2->setSize('80%');
         
+        $name->addValidation(_t('Name'), new TRequiredValidator);
+        $login->addValidation(_t('Name'), new TRequiredValidator);
+        $email->addValidation(_t('Name'), new TRequiredValidator);
         $email->addValidation( _t('Email'), new TEmailValidator);
         
-        $btn = $this->form->addQuickAction(_t('Save'), new TAction(array($this, 'onSave')), 'fa:save');
+        $this->form->addFields( [new TLabel(_t('Name'))],  [$name]);
+        $this->form->addFields( [new TLabel(_t('Login'))], [$login]);
+        $this->form->addFields( [new TLabel(_t('Email'))], [$email]);
+        $this->form->addFields( [new TLabel(_t('Photo'))], [$photo]);
+        $this->form->addFields( [new TLabel(_t('Password'))], [$password1]);
+        $this->form->addFields( [new TLabel(_t('Password confirmation'))], [$password2]);
+        
+        $btn = $this->form->addAction(_t('Save'), new TAction([$this, 'onSave']), 'fa:save');
         $btn->class = 'btn btn-sm btn-primary';
         
-        $panel = new TPanelGroup(_t('Profile'));
-        $panel->add($this->form);
-        
-        $container = TVBox::pack($panel);
-        $container->style = 'width: 100%';
-        parent::add($container);
+        parent::add($this->form);
     }
     
     public function onEdit($param)
@@ -76,6 +83,9 @@ class SystemProfileForm extends TPage
             $user = SystemUser::newFromLogin( TSession::getValue('login') );
             $user->name = $object->name;
             $user->email = $object->email;
+            
+            TSession::setValue('username', $user->name);
+            TSession::setValue('usermail', $user->email);
             
             if( $object->password1 )
             {

@@ -47,21 +47,17 @@ class TApplication extends AdiantiCoreApplication
      */
     public static function getDefaultPermissions()
     {
-        return array('Adianti\Base\TStandardSeek' => TRUE,
-                     'LoginForm' => TRUE,
-                     'AdiantiMultiSearchService' => TRUE,
-                     'AdiantiUploaderService' => TRUE,
-                     'AdiantiAutocompleteService' => TRUE,
-                     'EmptyPage' => TRUE,
-                     'MessageList' => TRUE,
-                     'SystemDocumentUploaderService' => TRUE,
-                     'NotificationList' => TRUE,
-                     'SearchBox' => TRUE,
-                     'SearchInputBox' => TRUE,
-                     'SystemPageService' => TRUE,
-                     'SystemPageBatchUpdate' => TRUE,
-                     'SystemPermissionUpdate' => TRUE,
-                     'SystemMenuUpdate' => TRUE);
+        return ['Adianti\Base\TStandardSeek' => TRUE,
+                'LoginForm' => TRUE,
+                'AdiantiMultiSearchService' => TRUE,
+                'AdiantiUploaderService' => TRUE,
+                'AdiantiAutocompleteService' => TRUE,
+                'SystemDocumentUploaderService' => TRUE,
+                'EmptyPage' => TRUE,
+                'MessageList' => TRUE,
+                'NotificationList' => TRUE,
+                'SearchBox' => TRUE,
+                'SearchInputBox' => TRUE];
     } 
 }
 

@@ -144,8 +144,9 @@ class LoginForm extends TPage
             
             if ($user)
             {
-                ApplicationAuthenticationService::setUnit( $data->unit_id ?? null );
-                ApplicationAuthenticationService::setLang( $data->lang_id ?? null );
+                //isset($data->lang_id) ? $data->lang_id : null;
+                ApplicationAuthenticationService::setUnit( isset($data->unit_id) ? $data->unit_id : null );
+                ApplicationAuthenticationService::setLang( isset($data->lang_id) ? $data->lang_id : null );
                 SystemAccessLogService::registerLogin();
                 
                 $frontpage = $user->frontpage;

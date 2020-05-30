@@ -106,7 +106,7 @@ class SystemDocumentList extends TPage
         //$action_edit->setUseButton(TRUE);
         $action_download->setButtonClass('btn btn-default');
         $action_download->setLabel(_t('Download'));
-        $action_download->setImage('fas:cloud-download-alt green fa-lg');
+        $action_download->setImage('fas:cloud-download-alt green');
         $action_download->setField('id');
         $this->datagrid->addAction($action_download);
 
@@ -115,7 +115,7 @@ class SystemDocumentList extends TPage
         //$action_edit->setUseButton(TRUE);
         $action_upload->setButtonClass('btn btn-default');
         $action_upload->setLabel(_t('Upload'));
-        $action_upload->setImage('fas:cloud-upload-alt orange fa-lg');
+        $action_upload->setImage('fas:cloud-upload-alt orange');
         $action_upload->setField('id');
         $this->datagrid->addAction($action_upload);
         
@@ -124,7 +124,7 @@ class SystemDocumentList extends TPage
         //$action_edit->setUseButton(TRUE);
         $action_edit->setButtonClass('btn btn-default');
         $action_edit->setLabel(_t('Edit'));
-        $action_edit->setImage('far:edit blue fa-lg');
+        $action_edit->setImage('far:edit blue');
         $action_edit->setField('id');
         $this->datagrid->addAction($action_edit);
         
@@ -133,7 +133,7 @@ class SystemDocumentList extends TPage
         //$action_del->setUseButton(TRUE);
         $action_del->setButtonClass('btn btn-default');
         $action_del->setLabel(_t('Delete'));
-        $action_del->setImage('far:trash-alt red fa-lg');
+        $action_del->setImage('far:trash-alt red');
         $action_del->setField('id');
         $this->datagrid->addAction($action_del);
         

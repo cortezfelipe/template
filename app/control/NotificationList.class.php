@@ -51,6 +51,8 @@ class NotificationList extends TElement
                     $subject = $system_notification->subject;
                     $icon    = $system_notification->icon ? $system_notification->icon : 'far fa-bell text-aqua';
                     $icon    = str_replace( 'fa:', 'fa fa-', $icon);
+                    $icon    = str_replace( 'far:', 'far fa-', $icon);
+                    $icon    = str_replace( 'fas:', 'fas fa-', $icon);
                     
                     $li  = new TElement('li');
                     $a   = new TElement('a');
@@ -102,6 +104,8 @@ class NotificationList extends TElement
                     $subject = $system_notification->subject;
                     $icon    = $system_notification->icon ? $system_notification->icon : 'far fa-bell text-aqua';
                     $icon    = str_replace( 'fa:', 'fa fa-', $icon);
+                    $icon    = str_replace( 'far:', 'far fa-', $icon);
+                    $icon    = str_replace( 'fas:', 'fas fa-', $icon);
                     
                     $li  = new TElement('li');
                     $a   = new TElement('a');

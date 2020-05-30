@@ -71,14 +71,14 @@ class SystemDocumentCategoryFormList extends TPage
         //$action1->setUseButton(TRUE);
         $action1->setButtonClass('btn btn-default');
         $action1->setLabel(_t('Edit'));
-        $action1->setImage('far:edit blue fa-lg');
+        $action1->setImage('far:edit blue');
         $action1->setField('id');
         
         $action2 = new TDataGridAction(array($this, 'onDelete'));
         //$action2->setUseButton(TRUE);
         $action2->setButtonClass('btn btn-default');
         $action2->setLabel(_t('Delete'));
-        $action2->setImage('far:trash-alt red fa-lg');
+        $action2->setImage('far:trash-alt red');
         $action2->setField('id');
         
         // add the actions to the datagrid

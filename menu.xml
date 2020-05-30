@@ -119,12 +119,7 @@
     </menuitem>
     
     <menuitem label='Logout'>
+        <action>LoginForm#method=onLogout#static=1</action>
         <icon>fas:sign-out-alt fa-fw</icon>
-        <menu>
-              <menuitem label='Logout'>
-                  <action>LoginForm#method=onLogout#static=1</action>
-                  <icon>fas:sign-out-alt fa-fw</icon>
-              </menuitem>
-        </menu>
     </menuitem>
 </menu>
