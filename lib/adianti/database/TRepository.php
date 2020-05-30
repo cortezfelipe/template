@@ -315,8 +315,8 @@ class TRepository
                 $indexedArray[ $key ] = $val;
             }
         }
-        
-        if (empty($criteria) or ( $criteria instanceof TCriteria and empty($criteria->getProperty('order')) ))
+        $err = $criteria->getProperty('order');
+        if (empty($criteria) or empty($err)) 
         {
             asort($indexedArray);
         }
