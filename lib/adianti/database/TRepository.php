@@ -632,7 +632,9 @@ class TRepository
         $alias = $alias ? $alias : $column;
         // creates a SELECT statement
         $sql = new TSqlSelect;
-        if (!empty( $this->criteria->getProperty('group') ))
+
+	$err = $this->criteria->getProperty('group');
+        if (empty($criteria) or empty($err)) 
         {
             $sql->addColumn( $this->criteria->getProperty('group') );
         }
